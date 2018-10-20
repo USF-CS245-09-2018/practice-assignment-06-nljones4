@@ -24,14 +24,14 @@ public class Practice06Test {
 	}
 	
 	
-	public boolean isPalindrome(String item) {
+	public boolean isPalindrome(String element) {
 		clearData();
-		for (int i = 0; i < item.length(); i++) {
-			String itemStr = item.substring(i, i+1);
-			if(! itemStr.equals(" ") && ! itemStr.equals("!")) {
-				String lowercaseStr = itemStr.toLowerCase();
-				stack.push(lowercaseStr);
-				queue.enqueue(lowercaseStr);
+		for (int i = 0; i < element.length(); i++) {
+			String elementStr = element.substring(i, i+1);
+			if(! elementStr.equals(" ") && ! elementStr.equals("!")) {
+				String lowerStr = elementStr.toLowerCase();
+				stack.push(lowerStr);
+				queue.enqueue(lowerStr);
 			}
 		}
 
