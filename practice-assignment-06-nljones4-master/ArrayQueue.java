@@ -10,8 +10,6 @@ public class ArrayQueue implements Queue {
 			throw new IllegalArgumentException("empty");
 		}
 		Object obj = arr[head];
-		//++head;
-		//arr[head] = null; //Removingg?
 		head = (head+1) % arr.length;
 		size--;
 		return obj;
