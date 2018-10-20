@@ -1,46 +1,47 @@
 public class ArrayQueue implements Queue {
 
-	protected Object[] arr = new Object[10];
-	protected int head = 0;
-	protected int tail = 0;
-	protected int size = 0;
+	private Object[] arr;
+	private int head;
+	private int tail;
+	private int size;
 	
+	public ArrayQueue(){
+		arr = new Object[10];
+		head = 0;
+		tail = -1;
+		size = 0;
+	}
 	public Object dequeue(){
 		if(empty()){
 			throw new IllegalArgumentException("empty");
 		}
-		Object obj = arr[head];
-		head = (head+1) % arr.length;
+		Object obj = arr[head % arr.length];
+		++head;
 		size--;
 		return obj;
 	}
+
 	public void enqueue(Object item){
-		if ((tail+1) % arr.length == head){// when number of elements is the size of array
+		if (tail >= arr.length){// when number of elements is the size of array
 			grow_array();
 		}
-		arr[tail++] = item;
-		if(tail>= arr.length){
-			tail = 0;
-		}
-		
+		++tail;
+		arr[tail % arr.length] = item;
+		size++;
 	}
 	
 	public boolean empty(){
-		if (head ==tail){
-			return true;
-		}
-		return false;
+		return size == 0;
 	}
 
 	public void grow_array(){
 		Object [] newArray = new Object[arr.length*2];
-		tail = 0;
-		for (int i = head; i < arr.length+head;i++){
-			newArray[tail++] = arr[i % arr.length];
+		for (int i = head; i <=tail;i++){
+			newArray[i] = arr[i % arr.length];
 		}
-		head = 0;
 		arr = newArray;
+		head = 0;
+		tail = size-1;
 		
 	}
-
 }

@@ -27,8 +27,12 @@ public class Practice06Test {
 	public boolean isPalindrome(String item) {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
-			stack.push(item.substring(i, i+1));
-			queue.enqueue(item.substring(i, i+1));
+			String itemStr = item.substring(i, i+1);
+			if(! itemStr.equals(" ") && ! itemStr.equals("!")) {
+				String lowercaseStr = itemStr.toLowerCase();
+				stack.push(lowercaseStr);
+				queue.enqueue(lowercaseStr);
+			}
 		}
 
 		while (! stack.empty() && ! queue.empty()) {
@@ -38,9 +42,9 @@ public class Practice06Test {
 		}
 		
 		// At this point, the stack AND the queue should be empty. But check in case...
-		if (!stack.empty() || ! queue.empty())
+		if (!stack.empty() || ! queue.empty()) {
 			return false;
-		
+		}
 		return true;
 	}
 	
@@ -91,7 +95,7 @@ public class Practice06Test {
 				queue.dequeue();
 				stack.pop();
 			}
-			if (queue.empty() && stack.empty() && ! emptiedEarly) {
+			if (queue.empty() && stack.empty() &&  !emptiedEarly) {
 				System.out.println("[+10%] Stack and Queue appear to resize correctly.");
 				grade += 10;
 			} else {
